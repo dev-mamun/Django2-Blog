@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="row justify-content-md-cente">
+        <div class="col-12">
+            <h1 class="text-center">{{ title }}</h1>
+        </div>
+    </div>
+    <div class="row justify-content-md-cente">
+        <div class="col-6 max-auto justify-content-md-cente">
+            <form id="post-form" name="post-form" action="." method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="text-center text-md-left">
+                    <a class="btn btn-primary" onclick="document.getElementById('post-form').submit();">Send</a>
+                </div>
+                <div class="status"></div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
