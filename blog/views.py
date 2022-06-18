@@ -12,7 +12,7 @@ from .form import PostModelForm
 
 def list(request):
     template = 'list.html'
-    list = BlogPost.objects.all()
+    list = BlogPost.objects.all().published()
     context = {'objects': list}
     return render(request, template, context)
 

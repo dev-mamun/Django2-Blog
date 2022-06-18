@@ -4,7 +4,7 @@
     <div class="row">
         <div class="card-group">
             {% for obj in objects %}
-                {% include "items.html" with post=obj %}
+                {% include "items.html" with post=obj truncate=True detail=False %}
             {% endfor %}
         </div>
     </div>

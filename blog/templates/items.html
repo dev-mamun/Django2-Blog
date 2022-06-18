@@ -1,8 +1,17 @@
-<div class="col-12 col-md-6 mb-3 max-auto">
+<div class="col-12 col-md-12 mb-3 max-auto">
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text">{{ post.content }}</p>
+            <p class="card-text">
+                {% if truncate %}
+                    {{ post.content|linebreaks|truncatewords:30 }}
+                {% else %}
+                    {{ post.content|linebreaks }}
+                {% endif %}
+            </p>
+            {% if not detail %}
+                <a href="{{ post.get_post_url }}">Detail</a>
+            {% endif %}
         </div>
     </div>
 </div>
