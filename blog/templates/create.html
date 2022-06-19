@@ -8,7 +8,7 @@
 </div>
 <div class="row justify-content-md-cente">
     <div class="col-6 max-auto justify-content-md-cente">
-        <form id="post-form" name="post-form" action="." method="POST">
+        <form id="post-form" name="post-form" action="." method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="text-center text-md-left">

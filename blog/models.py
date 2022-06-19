@@ -7,7 +7,8 @@ User = settings.AUTH_USER_MODEL
 
 class BlogPostQuerySet(models.QuerySet):
     def published(self):
-        return self.filter(published_at__lte=timezone.now())
+        now = timezone.now()
+        return self.filter(published_at__lte=now)
 
 
 class BlogPostManager(models.Manager):
@@ -25,6 +26,7 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(unique=True, max_length=50)
     content = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='image/', blank=True, null=True)
     published_at = models.DateTimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False, blank=False, null=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

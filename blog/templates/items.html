@@ -1,8 +1,18 @@
 <div class="col-12 col-md-12 mb-3 max-auto">
-    <div class="card">
+    <div class="card {% if not post.published_at %} border border-warning {% endif %}">
         <div class="card-body">
+            {% if post.image %}
+                <a href="{{ post.get_post_url }}">
+                    {% if not detail %}
+                        <img src="{{ post.image.url }}" class="img-thumbnail" width="150" height="150"/>
+                    {% else %}
+                        <img src="{{ post.image.url }}" class="img-thumbnail" width="400" height="400"/>
+                    {% endif %}
+                </a>
+            {% endif %}
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">
+                <small class="text-muted">{{ post.published_at }}</small>
                 {% if truncate %}
                     {{ post.content|linebreaks|truncatewords:30 }}
                 {% else %}
@@ -10,6 +20,7 @@
                 {% endif %}
             </p>
             {% if not detail %}
+                {% if not post.published_at %} Draft {% endif %}
                 <a href="{{ post.get_post_url }}">Detail</a>
             {% endif %}
         </div>

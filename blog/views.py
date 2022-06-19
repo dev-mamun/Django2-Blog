@@ -13,6 +13,9 @@ from .form import PostModelForm
 def list(request):
     template = 'list.html'
     list = BlogPost.objects.all().published()
+    if request.user.is_authenticated:
+        qs = BlogPost.objects.filter(user=request.user)
+
     context = {'objects': list}
     return render(request, template, context)
 
@@ -21,7 +24,7 @@ def list(request):
 def create_view(request):
     template = 'create.html'
 
-    form = PostModelForm(request.POST or None)
+    form = PostModelForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         print(form.cleaned_data)
         post = form.save(commit=False)
